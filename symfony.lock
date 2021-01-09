@@ -108,6 +108,9 @@
     "league/oauth2-server": {
         "version": "8.2.4"
     },
+    "league/tactician": {
+        "version": "v1.0.3"
+    },
     "paragonie/random_compat": {
         "version": "v9.99.100"
     },
@@ -161,6 +164,9 @@
     },
     "sebastian/recursion-context": {
         "version": "4.0.4"
+    },
+    "slick/event": {
+        "version": "v1.0.0"
     },
     "symfony/apache-pack": {
         "version": "1.0",

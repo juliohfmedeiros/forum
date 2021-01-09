@@ -29,3 +29,34 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # Command handlers
+    App\Application\:
+        resource: '../src/Application/**/*Handler.php'
+        tags: [ command_handler ]
+        public: true
+
+    # command bus services
+    League\Tactician\CommandBus:
+        class: League\Tactician\CommandBus
+        arguments:
+            $middleware: [ '@command.bus.middleware' ]
+
+    command.bus.middleware:
+        class: League\Tactician\Handler\CommandHandlerMiddleware
+        arguments:
+            $commandNameExtractor: '@command.bus.name.extractor'
+            $handlerLocator: '@command.bus.handler.locator'
+            $methodNameInflector: '@command.bus.method.name.inflector'
+
+    command.bus.name.extractor:
+        class: League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor
+
+    command.bus.method.name.inflector:
+        class: League\Tactician\Handler\MethodNameInflector\HandleInflector
+
+    command.bus.handler.locator:
+        class: App\Infrastructure\CommandBus\ClassNameHandlerLocator
+        public: true
+        arguments:
+            $container: '@service_container'
