@@ -16,7 +16,7 @@ use League\OAuth2\Server\Repositories\ClientRepositoryInterface;
  *
  * @package App\Domain\UserManagement\OAuth2
  */
-interface ClientRepository extends ClientRepositoryInterface
+interface ClientsRepository extends ClientRepositoryInterface
 {
 
     /**

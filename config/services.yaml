@@ -30,6 +30,10 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
+    # Event dispatcher
+    Slick\Event\EventDispatcher:
+        class: Slick\Event\Application\EventDispatcher
+
     # Command handlers
     App\Application\:
         resource: '../src/Application/**/*Handler.php'
