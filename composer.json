@@ -27,7 +27,8 @@
         "symfony/yaml": "5.2.*"
     },
     "require-dev": {
-        "phpspec/phpspec": "^7.0"
+        "phpspec/phpspec": "^7.0",
+        "zircote/swagger-php": "^3.1"
     },
     "config": {
         "optimize-autoloader": true,
@@ -61,7 +62,8 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "create-doc": "openapi --output public/openapi.json --format json src"
     },
     "conflict": {
         "symfony/symfony": "*"

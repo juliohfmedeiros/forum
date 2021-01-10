@@ -1,0 +1,75 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Forum DAF",
+        "description": "Este projecto visa criar uma API REST para desenvolvimento de um site ou aplicação de\nsuporte, num formato de pergunta e respostas.<br />\nTem como principal objectivo testar a capacidade do aluno criar uma aplicação web, com\nSymfony 4 e usando os padrões lecionados nas aulas da disciplina de “desenvolvimento de\naplicações com frameworks.",
+        "contact": {
+            "email": "silvam.filipe@gmail.com"
+        },
+        "version": "v0.1.0"
+    },
+    "components": {
+        "schemas": {
+            "DateTime": {
+                "properties": {
+                    "date": {
+                        "description": "Formatted date",
+                        "type": "string",
+                        "example": "2018-07-04 23:07:14.000000"
+                    },
+                    "timezone_type": {
+                        "description": "Timezone type ID",
+                        "type": "integer",
+                        "format": "int32",
+                        "example": "3"
+                    },
+                    "timezone": {
+                        "description": "Timezone name",
+                        "type": "string",
+                        "example": "Atlantic/Azores"
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "title": "User",
+                "description": "User",
+                "properties": {
+                    "userId": {
+                        "description": "User identifier",
+                        "type": "string",
+                        "example": "e1026e90-9b21-4b6d-b06e-9c592f7bdb82"
+                    },
+                    "name": {
+                        "description": "User full name",
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "email": {
+                        "description": "User's e-mail address",
+                        "type": "string",
+                        "example": "john.doe@example.com"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "OAuth2.0-Token": {
+                "type": "oauth2",
+                "flows": {
+                    "password": {
+                        "tokenUrl": "http://0.0.0.0:8080/auth/access-token",
+                        "scopes": {}
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Users",
+            "description": "User related endpoints"
+        }
+    ]
+}
