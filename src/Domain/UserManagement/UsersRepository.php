@@ -9,6 +9,7 @@
 
 namespace App\Domain\UserManagement;
 
+use App\Domain\Exception\EntityNotFound;
 use App\Domain\UserManagement\User\Email;
 use App\Domain\UserManagement\User\UserId;
 use League\OAuth2\Server\Repositories\UserRepositoryInterface;
@@ -49,7 +50,7 @@ interface UsersRepository extends UserRepositoryInterface
      * @param UserId $userId
      * @return User
      *
-     * @throws \RuntimeException if user is not found
+     * @throws EntityNotFound if user is not found
      */
     public function withUserId(UserId $userId): User;
 
@@ -59,7 +60,7 @@ interface UsersRepository extends UserRepositoryInterface
      * @param Email $email
      * @return User
      *
-     * @throws \RuntimeException if user is not found
+     * @throws EntityNotFound if user is not found
      */
     public function withEmail(Email $email): User;
 }
