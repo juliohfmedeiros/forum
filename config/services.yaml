@@ -40,6 +40,16 @@ services:
         tags: [ command_handler ]
         public: true
 
+    # Karnel event listeners
+    App\Infrastructure\HttpKernel\EventListener\ControllerListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, priority: 10 }
+
+    App\Infrastructure\HttpKernel\EventListener\ExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
+
+
     # command bus services
     League\Tactician\CommandBus:
         class: League\Tactician\CommandBus

@@ -8,6 +8,36 @@
         },
         "version": "v0.1.0"
     },
+    "paths": {
+        "/users/me": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Current user information",
+                "operationId": "userInfo",
+                "responses": {
+                    "200": {
+                        "description": "Current user information",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2.0-Token": [
+                            "user.management"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
     "components": {
         "schemas": {
             "DateTime": {
