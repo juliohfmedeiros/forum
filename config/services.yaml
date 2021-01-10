@@ -64,3 +64,73 @@ services:
         public: true
         arguments:
             $container: '@service_container'
+
+    # OAuth2.0 Server
+    users.repository:
+        alias: App\Infrastructure\Persistence\Doctrine\UserManagement\DoctrineUsersRepository
+
+    clients.repository:
+        alias: App\Infrastructure\Persistence\Doctrine\UserManagement\OAuth2\DoctrineClientsRepository
+
+    scopes.repository:
+        alias: App\Infrastructure\Persistence\Doctrine\UserManagement\OAuth2\DoctrineScopesRepository
+
+    access.tokens.repository:
+        alias: App\Infrastructure\Persistence\Doctrine\UserManagement\OAuth2\DoctrineAccessTokensRepository
+
+    refresh.tokens.repository:
+        alias: App\Infrastructure\Persistence\Doctrine\UserManagement\OAuth2\DoctrineRefreshTokensRepository
+
+    oauth2.password.grant:
+        class: League\OAuth2\Server\Grant\PasswordGrant
+        arguments:
+            - '@users.repository'
+            - '@refresh.tokens.repository'
+        calls:
+            - method: setRefreshTokenTTL
+              arguments:
+                  - '@refresh.token.ttl'
+
+    oauth2.refresh.token.grant:
+        class: League\OAuth2\Server\Grant\RefreshTokenGrant
+        arguments:
+            - '@refresh.tokens.repository'
+        calls:
+            - method: setRefreshTokenTTL
+              arguments:
+                  - '@refresh.token.ttl'
+
+    refresh.token.ttl:
+        class: DateInterval
+        arguments:
+            - 'P1M'
+    access.token.ttl:
+        class: DateInterval
+        arguments:
+            - 'PT1H'
+
+    League\OAuth2\Server\AuthorizationServer:
+        class: League\OAuth2\Server\AuthorizationServer
+        tags: [ 'league.authorization.server', 'authorization.server' ]
+        arguments:
+            $clientRepository: '@clients.repository'
+            $accessTokenRepository: '@access.tokens.repository'
+            $scopeRepository: '@scopes.repository'
+            $privateKey: '%kernel.project_dir%/%env(OAUTH_PRIVATE_KEY)%'
+            $encryptionKey: '%env(OAUTH_ENC_KEY)%'
+        calls:
+            - method: enableGrantType
+              arguments:
+                  - '@oauth2.password.grant'
+                  - '@access.token.ttl'
+            - method: enableGrantType
+              arguments:
+                  - '@oauth2.refresh.token.grant'
+                  - '@access.token.ttl'
+
+    League\OAuth2\Server\ResourceServer:
+        class: League\OAuth2\Server\ResourceServer
+        tags: [ 'league.resource.server', 'resource.server' ]
+        arguments:
+            $accessTokenRepository: '@access.tokens.repository'
+            $publicKey: '%kernel.project_dir%/%env(OAUTH_PUBLIC_KEY)%'
