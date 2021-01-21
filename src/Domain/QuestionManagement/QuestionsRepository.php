@@ -36,4 +36,19 @@ interface QuestionsRepository
      * @throws EntityNotFound when no question is found for provided identifier
      */
     public function withId(QuestionId $questionId): Question;
+
+    /**
+     * Updates changes on provided question
+     *
+     * @param Question $question
+     * @return Question
+     */
+    public function update(Question $question): Question;
+
+    /**
+     * Remove provided question from repository
+     *
+     * @param Question $question
+     */
+    public function remove(Question $question): void;
 }
