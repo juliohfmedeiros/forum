@@ -5,6 +5,7 @@ doctrine:
             UserId: App\Infrastructure\Persistence\Doctrine\UserManagement\User\DoctrineUserId
             Email: App\Infrastructure\Persistence\Doctrine\UserManagement\User\DoctrineEmail
             Password: App\Infrastructure\Persistence\Doctrine\UserManagement\User\DoctrinePassword
+            QuestionId: App\Infrastructure\Persistence\Doctrine\QuestionManagement\Question\DoctrineQuestionId
 
 
         # IMPORTANT: You MUST configure your server version,

@@ -7,6 +7,8 @@ use App\Domain\UserManagement\User\Email;
 use App\Domain\UserManagement\User\Password;
 use App\Domain\UserManagement\User\UserId;
 use Doctrine\Common\Annotations\Annotation\IgnoreAnnotation;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use JsonSerializable;
 use League\OAuth2\Server\Entities\UserEntityInterface;
@@ -76,6 +78,12 @@ class User implements  UserEntityInterface, JsonSerializable, Comparable
     private $password;
 
     /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="App\Domain\QuestionManagement\Question", mappedBy="owner")
+     */
+    private Collection $questions;
+
+    /**
      * Creates an User
      *
      * @param string        $name
@@ -90,6 +98,7 @@ class User implements  UserEntityInterface, JsonSerializable, Comparable
         $this->name = $name;
         $this->email = $email;
         $this->password = $password ?: new Password();
+        $this->questions = new ArrayCollection();
     }
 
     /**
@@ -168,6 +177,16 @@ class User implements  UserEntityInterface, JsonSerializable, Comparable
     public function getIdentifier()
     {
         return $this->userId;
+    }
+
+    /**
+     * User owned questions
+     *
+     * @return Collection
+     */
+    public function questions()
+    {
+        return $this->questions;
     }
 
     /**

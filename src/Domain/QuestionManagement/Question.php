@@ -7,33 +7,65 @@ use App\Domain\QuestionManagement\Question\Events\QuestionWasEdited;
 use App\Domain\QuestionManagement\Question\QuestionId;
 use App\Domain\UserManagement\User;
 use DateTimeImmutable;
+use Doctrine\ORM\Mapping as ORM;
 use Slick\Event\Domain\EventGeneratorMethods;
 use Slick\Event\EventGenerator;
 
+/**
+ * Question
+ *
+ * @package App\Domain\QuestionManagement
+ *
+ * @ORM\Entity()
+ * @ORM\Table(name="questions")
+ */
 class Question implements EventGenerator
 {
 
     use EventGeneratorMethods;
 
+    /**
+     * @var QuestionId
+     * @ORM\Id()
+     * @ORM\Column(type="QuestionId", name="id")
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
     private QuestionId $questionId;
 
     /**
      * @var User
+     * @ORM\ManyToOne(targetEntity="App\Domain\UserManagement\User", inversedBy="questions")
+     * @ORM\JoinColumn(nullable=false)
      */
     private User $owner;
+
     /**
      * @var string
+     * @ORM\Column()
      */
     private string $title;
     /**
      * @var string
+     * @ORM\Column()
      */
     private string $body;
 
+    /**
+     * @var DateTimeImmutable
+     * @ORM\Column(type="datetime_immutable", name="applied_on")
+     */
     private DateTimeImmutable $appliedOn;
 
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     */
     private bool $open = true;
 
+    /**
+     * @var DateTimeImmutable|null
+     * @ORM\Column(type="datetime_immutable", name="last_edited_on", nullable=true)
+     */
     private ?DateTimeImmutable $lastEditedOn = null;
 
 
