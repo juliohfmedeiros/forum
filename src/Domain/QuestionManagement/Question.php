@@ -3,6 +3,7 @@
 namespace App\Domain\QuestionManagement;
 
 use App\Domain\QuestionManagement\Question\Events\QuestionWasCreated;
+use App\Domain\QuestionManagement\Question\Events\QuestionWasEdited;
 use App\Domain\QuestionManagement\Question\QuestionId;
 use App\Domain\UserManagement\User;
 use DateTimeImmutable;
@@ -30,6 +31,10 @@ class Question implements EventGenerator
     private string $body;
 
     private DateTimeImmutable $appliedOn;
+
+    private bool $open = true;
+
+    private ?DateTimeImmutable $lastEditedOn = null;
 
 
     /**
@@ -97,5 +102,35 @@ class Question implements EventGenerator
     public function appliedOn(): DateTimeImmutable
     {
         return $this->appliedOn;
+    }
+
+    public function lastEditedOn(): ?DateTimeImmutable
+    {
+        return $this->lastEditedOn;
+    }
+
+    public function isOpen(): bool
+    {
+        return $this->open;
+    }
+
+    /**
+     * Changes title and body of this question
+     *
+     * @param string $title
+     * @param string $body
+     * @return Question
+     */
+    public function change(string $title, string $body): Question
+    {
+        $this->title = $title;
+        $this->body = $body;
+        $this->lastEditedOn = new DateTimeImmutable();
+        $this->recordThat(new QuestionWasEdited(
+            $this->questionId,
+            $title,
+            $body
+        ));
+        return $this;
     }
 }

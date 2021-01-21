@@ -3,6 +3,7 @@
 namespace spec\App\Domain\QuestionManagement;
 
 use App\Domain\QuestionManagement\Question;
+use App\Domain\QuestionManagement\Question\Events\QuestionWasEdited;
 use App\Domain\UserManagement\User;
 use PhpSpec\ObjectBehavior;
 use Slick\Event\EventGenerator;
@@ -55,5 +56,29 @@ class QuestionSpec extends ObjectBehavior
     function it_has_a_date_when_it_was_applied()
     {
         $this->appliedOn()->shouldBeAnInstanceOf(\DateTimeImmutable::class);
+    }
+
+    function it_has_a_last_edited_on_date_time()
+    {
+        $this->lastEditedOn()->shouldBe(null);
+    }
+
+    function it_has_a_open_status()
+    {
+        $this->isOpen()->shouldBe(true);
+    }
+
+    function it_can_be_changed()
+    {
+        $title = "new title";
+        $body = "new body";
+
+        $this->releaseEvents();
+        $this->change($title, $body)->shouldBe($this->getWrappedObject());
+
+        $this->title()->shouldBe($title);
+        $this->body()->shouldBe($body);
+        $this->lastEditedOn()->shouldBeAnInstanceOf(\DateTimeImmutable::class);
+        $this->releaseEvents()[0]->shouldBeAnInstanceOf(QuestionWasEdited::class);
     }
 }
