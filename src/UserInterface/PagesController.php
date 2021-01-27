@@ -46,6 +46,13 @@ aplicações com frameworks.",
 
 /**
  * @OA\Tag(
+ *     name="Questions",
+ *     description="Questrions API endpoints"
+ * )
+ */
+
+/**
+ * @OA\Tag(
  *     name="Users",
  *     description="User related endpoints"
  * )
@@ -62,3 +69,15 @@ aplicações com frameworks.",
  *   )
  * )
  */
+
+/**
+ * @OA\Schema(
+ *     schema="DateTimeImmutable",
+ *     title="DateTimeImmutable",
+ *     type="object",
+ *     @OA\Property(type="string", property="date", example="2019-07-07 00:00:00.000000"),
+ *     @OA\Property(type="int", property="timezone_type", example=3),
+ *     @OA\Property(type="string", property="timezone", example="UTC"),
+ * )
+ */
+

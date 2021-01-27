@@ -97,4 +97,24 @@ trait ApiControllerMethods
         return $response;
     }
 
+    /**
+     * Returns a 404 response with provided error message
+     *
+     * @param string $message
+     *
+     * @param int $estatus
+     * @return Response
+     */
+    protected function notFound(string $message, $status = Response::HTTP_NOT_FOUND): Response
+    {
+        return new Response(
+            json_encode([
+                'error' => 'Not found',
+                'message' => $message
+            ]),
+            $status,
+            ['content-type' => 'application/json']
+        );
+    }
+
 }

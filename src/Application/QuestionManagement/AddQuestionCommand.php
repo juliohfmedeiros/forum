@@ -5,13 +5,41 @@ namespace App\Application\QuestionManagement;
 use App\Application\Command;
 use App\Domain\UserManagement\User;
 
+/**
+ * AddQuestionCommand
+ *
+ * @package App\Application\QuestionManagement
+ *
+ * @OA\Schema(
+ *     description="AddQuestionCommand",
+ *     title="AddQuestionCommand"
+ * )
+ */
 class AddQuestionCommand implements Command
 {
     /**
      * @var User
      */
     private User $owner;
+
+    /**
+     * @var string
+     *
+     * @OA\Property(
+     *     description="Question title",
+     *     example="What time is it?"
+     * )
+     */
     private string $title;
+
+    /**
+     * @var string
+     *
+     * @OA\Property(
+     *     description="Question body",
+     *     example="A longuer consideration on how to ask for current time."
+     * )
+     */
     private string $body;
 
 

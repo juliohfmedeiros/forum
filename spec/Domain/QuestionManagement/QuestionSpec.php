@@ -81,4 +81,18 @@ class QuestionSpec extends ObjectBehavior
         $this->lastEditedOn()->shouldBeAnInstanceOf(\DateTimeImmutable::class);
         $this->releaseEvents()[0]->shouldBeAnInstanceOf(QuestionWasEdited::class);
     }
+
+    function it_can_be_converted_to_json(User $user)
+    {
+        $this->shouldBeAnInstanceOf(\JsonSerializable::class);
+        $this->jsonSerialize()->shouldBe([
+            "questionId" => $this->questionId()->getWrappedObject(),
+            "title" => $this->title,
+            "body" => $this->body,
+            "owner" => $user,
+            "open" => true,
+            "appliedOn" => $this->appliedOn()->getWrappedObject(),
+            "lastEditedOn" => null,
+        ]);
+    }
 }
