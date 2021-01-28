@@ -117,4 +117,23 @@ trait ApiControllerMethods
         );
     }
 
+    /**
+     * Returns a 412 response with provided error message
+     *
+     * @param string $message
+     * @param int $status
+     * @return Response
+     */
+    protected function preconditionFailed(string $message, int $status = Response::HTTP_PRECONDITION_FAILED): Response
+    {
+        return new Response(
+            json_encode([
+                'error' => 'Precondition Failed',
+                'message' => $message
+            ]),
+            $status,
+            ['content-type' => 'application/json']
+        );
+    }
+
 }

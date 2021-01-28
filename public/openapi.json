@@ -52,6 +52,63 @@
                 ]
             }
         },
+        "/question/{questionId}": {
+            "put": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Edits the question with the provided question identifier",
+                "operationId": "editQuestion",
+                "parameters": [
+                    {
+                        "name": "questionId",
+                        "in": "path",
+                        "description": "ID of question to edit",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "request": "EditQuestion",
+                    "description": "Object containing the new inforamtion needded to update the question stored with the privided identifier",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EditQuestionCommand"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Missing property or errors regarding data sent."
+                    },
+                    "412": {
+                        "description": "Trying to edit a question that isn't owned by the authenticated user or it's open."
+                    },
+                    "200": {
+                        "description": "The question with changed values",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Question"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2.0-Token": [
+                            "user.management"
+                        ]
+                    }
+                ]
+            }
+        },
         "/users/me": {
             "get": {
                 "tags": [
@@ -95,7 +152,24 @@
                     "body": {
                         "description": "Question body",
                         "type": "string",
-                        "example": "A longuer consideration on how to ask for current time."
+                        "example": "A longer consideration on how to ask for current time."
+                    }
+                },
+                "type": "object"
+            },
+            "EditQuestionCommand": {
+                "title": "EditQuestionCommand",
+                "description": "EditQuestionCommand",
+                "properties": {
+                    "title": {
+                        "description": "Question title",
+                        "type": "string",
+                        "example": "What time is it in Boston?"
+                    },
+                    "body": {
+                        "description": "Question body",
+                        "type": "string",
+                        "example": "A longer consideration on how to ask for current time in Boston."
                     }
                 },
                 "type": "object"

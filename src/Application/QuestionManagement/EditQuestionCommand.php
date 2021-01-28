@@ -5,13 +5,40 @@ namespace App\Application\QuestionManagement;
 use App\Application\Command;
 use App\Domain\QuestionManagement\Question\QuestionId;
 
+/**
+ * EditQuestionCommand
+ *
+ * @package App\Application\QuestionManagement
+ *
+ * @OA\Schema(
+ *     description="EditQuestionCommand",
+ *     title="EditQuestionCommand"
+ * )
+ */
 class EditQuestionCommand implements Command
 {
     /**
      * @var QuestionId
      */
     private QuestionId $questionId;
+
+    /**
+     * @var string
+     * @OA\Property(
+     *     description="Question title",
+     *     example="What time is it in Boston?"
+     * )
+     *
+     */
     private string $title;
+
+    /**
+     * @var string
+     * @OA\Property(
+     *     description="Question body",
+     *     example="A longer consideration on how to ask for current time in Boston."
+     * )
+     */
     private string $body;
 
     /**

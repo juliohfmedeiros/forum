@@ -37,7 +37,7 @@ class AddQuestionCommand implements Command
      *
      * @OA\Property(
      *     description="Question body",
-     *     example="A longuer consideration on how to ask for current time."
+     *     example="A longer consideration on how to ask for current time."
      * )
      */
     private string $body;
