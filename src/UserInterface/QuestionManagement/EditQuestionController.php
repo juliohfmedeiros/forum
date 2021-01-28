@@ -96,6 +96,10 @@ final class EditQuestionController extends AbstractController implements Authent
  *         response=400,
  *         description="Missing property or errors regarding data sent."
  *     ),
+ *     @OA\Response(
+ *         response=404,
+ *         description="Quesiton not found"
+ *     ),
  *     @OA\Parameter(
  *         name="questionId",
  *         in="path",

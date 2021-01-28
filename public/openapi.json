@@ -53,6 +53,49 @@
             }
         },
         "/question/{questionId}": {
+            "get": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Retrieves the question stored with provided question identifier",
+                "operationId": "readQuestion",
+                "parameters": [
+                    {
+                        "name": "questionId",
+                        "in": "path",
+                        "description": "ID of question to retrieve",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Invalid question identifier"
+                    },
+                    "404": {
+                        "description": "Quesiton not found"
+                    },
+                    "200": {
+                        "description": "The question with stored with provided identifier",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Question"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2.0-Token": [
+                            "user.management"
+                        ]
+                    }
+                ]
+            },
             "put": {
                 "tags": [
                     "Questions"
@@ -85,6 +128,9 @@
                 "responses": {
                     "400": {
                         "description": "Missing property or errors regarding data sent."
+                    },
+                    "404": {
+                        "description": "Quesiton not found"
                     },
                     "412": {
                         "description": "Trying to edit a question that isn't owned by the authenticated user or it's open."
