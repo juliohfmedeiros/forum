@@ -10,6 +10,61 @@
     },
     "paths": {
         "/questions": {
+            "get": {
+                "tags": [
+                    "Questions"
+                ],
+                "summary": "Lists the questions of current logged in user",
+                "operationId": "readMyQuestions",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "Start page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "rows",
+                        "in": "query",
+                        "description": "Number of rows per page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "pattern",
+                        "in": "query",
+                        "description": "Filters result with a search pattern",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of user questions",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/QuestionList"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "OAuth2.0-Token": [
+                            "user.management"
+                        ]
+                    }
+                ]
+            },
             "post": {
                 "tags": [
                     "Questions"
@@ -313,6 +368,69 @@
                     "timezone": {
                         "type": "string",
                         "example": "UTC"
+                    }
+                },
+                "type": "object"
+            },
+            "ListingQuestion": {
+                "title": "Listing Question",
+                "properties": {
+                    "questionId": {
+                        "type": "string",
+                        "example": "e1026e90-9b21-4b6d-b06e-9c592f7bdb82"
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "What time is it in Boston?"
+                    },
+                    "body": {
+                        "type": "string",
+                        "example": "A longer consideration on how to ask for current time in Boston."
+                    },
+                    "open": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "ownerId": {
+                        "type": "string",
+                        "example": "e1026e90-9b21-4b6d-b06e-9c592f7bdb82"
+                    },
+                    "appliedOn": {
+                        "type": "string",
+                        "example": "021-01-27 15:59:01"
+                    },
+                    "ownerName": {
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "ownerEmail": {
+                        "type": "string",
+                        "example": "john.doe@example.com"
+                    }
+                },
+                "type": "object"
+            },
+            "QuestionList": {
+                "properties": {
+                    "attributes": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/ListingQuestion"
+                        }
+                    },
+                    "count": {
+                        "type": "integer",
+                        "example": 32
+                    },
+                    "isEmpty": {
+                        "type": "bool",
+                        "example": false
                     }
                 },
                 "type": "object"
