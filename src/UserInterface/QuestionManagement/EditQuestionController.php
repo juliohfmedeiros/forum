@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * EditQuestionController
+ * EditAnswerController
  *
  * @package App\UserInterface\QuestionManagement
  */
@@ -40,7 +40,7 @@ final class EditQuestionController extends AbstractController implements Authent
     private CommandBus $commandBus;
 
     /**
-     * Creates a EditQuestionController
+     * Creates a EditAnswerController
      *
      * @param CommandBus $commandBus
      */

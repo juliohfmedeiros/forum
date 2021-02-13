@@ -14,7 +14,7 @@ use Slick\Event\Domain\EventGeneratorMethods;
 use Slick\Event\EventGenerator;
 
 /**
- * Question
+ * Tag
  *
  * @package App\Domain\QuestionManagement
  *
@@ -25,8 +25,8 @@ use Slick\Event\EventGenerator;
  * @IgnoreAnnotation("OA\Property")
  *
  * @OA\Schema(
- *     description="Question",
- *     title="Question"
+ *     description="Tag",
+ *     title="Tag"
  * )
  */
 class Question implements EventGenerator, JsonSerializable
@@ -42,7 +42,7 @@ class Question implements EventGenerator, JsonSerializable
      *
      * @OA\Property(
      *     type="string",
-     *     description="Question identifier",
+     *     description="Tag identifier",
      *     example="e1026e90-9b21-4b6d-b06e-9c592f7bdb82"
      * )
      */
@@ -65,7 +65,7 @@ class Question implements EventGenerator, JsonSerializable
      * @ORM\Column()
      *
      * @OA\Property(
-     *     description="Question title",
+     *     description="Tag title",
      *     example="What time is it?"
      * )
      */
@@ -75,7 +75,7 @@ class Question implements EventGenerator, JsonSerializable
      * @ORM\Column()
      *
      * @OA\Property(
-     *     description="Question body",
+     *     description="Tag body",
      *     example="A longuer consideration on how to ask for current time."
      * )
      */
@@ -97,7 +97,7 @@ class Question implements EventGenerator, JsonSerializable
      * @ORM\Column(type="boolean")
      *
      * @OA\Property(
-     *     description="Question open state",
+     *     description="Tag open state",
      *     type="boolean",
      *     example=false
      * )
@@ -117,7 +117,7 @@ class Question implements EventGenerator, JsonSerializable
 
 
     /**
-     * Creates a Question
+     * Creates a Tag
      *
      * @param User $owner
      * @param string $title

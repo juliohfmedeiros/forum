@@ -26,7 +26,7 @@ class AddQuestionCommand implements Command
      * @var string
      *
      * @OA\Property(
-     *     description="Question title",
+     *     description="Tag title",
      *     example="What time is it?"
      * )
      */
@@ -36,7 +36,7 @@ class AddQuestionCommand implements Command
      * @var string
      *
      * @OA\Property(
-     *     description="Question body",
+     *     description="Tag body",
      *     example="A longer consideration on how to ask for current time."
      * )
      */

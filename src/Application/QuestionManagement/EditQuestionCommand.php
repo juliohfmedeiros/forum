@@ -25,7 +25,7 @@ class EditQuestionCommand implements Command
     /**
      * @var string
      * @OA\Property(
-     *     description="Question title",
+     *     description="Tag title",
      *     example="What time is it in Boston?"
      * )
      *
@@ -35,7 +35,7 @@ class EditQuestionCommand implements Command
     /**
      * @var string
      * @OA\Property(
-     *     description="Question body",
+     *     description="Tag body",
      *     example="A longer consideration on how to ask for current time in Boston."
      * )
      */

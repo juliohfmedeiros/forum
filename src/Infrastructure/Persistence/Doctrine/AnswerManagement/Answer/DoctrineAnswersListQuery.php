@@ -7,21 +7,21 @@
  * file that was distributed with this source code.
  */
 
-namespace App\Infrastructure\Persistence\Doctrine\QuestionManagement\Question;
+namespace App\Infrastructure\Persistence\Doctrine\AnswerManagement\Answer;
 
 use App\Application\Pagination;
 use App\Application\QueryResult;
-use App\Application\QuestionManagement\QuestionsListQuery;
+use App\Application\AnswerManagement\AnswersListQuery;
 use Doctrine\DBAL\Driver\Connection;
 use Doctrine\DBAL\Exception as DBALException;
 use Doctrine\DBAL\Query\QueryBuilder;
 
 /**
- * DoctrineQuestionsListQuery
+ * DoctrineAnswersListQuery
  *
- * @package App\Infrastructure\Persistence\Doctrine\QuestionManagement\Question
+ * @package App\Infrastructure\Persistence\Doctrine\AnswerManagement\Tag
  */
-final class DoctrineQuestionsListQuery implements QuestionsListQuery
+final class DoctrineAnswersListQuery implements AnswersListQuery
 {
 
     /**
@@ -30,14 +30,13 @@ final class DoctrineQuestionsListQuery implements QuestionsListQuery
     private $connection;
 
     /**
-     * DoctrineQuestionsQuery constructor.
+     * DoctrineAnswerQuery constructor.
      * @param Connection|\Doctrine\DBAL\Connection $connection
      */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
     }
-
 
     /**
      * Returns a query result for provided attribute list
@@ -49,7 +48,7 @@ final class DoctrineQuestionsListQuery implements QuestionsListQuery
     public function data(array $attributes = []): QueryResult
     {
         $queryBuilder = $this->connection->createQueryBuilder()
-            ->from("questions", "q")
+            ->from("answers", "q")
             ->leftJoin("q", "users", "u", "u.id = q.owner_id");
 
         $this->checkOwnerClause($attributes, $queryBuilder);
@@ -61,7 +60,7 @@ final class DoctrineQuestionsListQuery implements QuestionsListQuery
             ->forPage($attributes["page"]);
 
         $queryBuilder
-            ->select("q.id as questionId, q.title, q.body, q.open, u.id as ownerId, q.applied_on as appliedOn, u.name as ownerName, u.email as ownerEmail")
+            ->select("q.id as answerId, q.description, q.accepted, u.id as ownerId, q.given_on as givenOn, u.name as ownerName, u.email as ownerEmail")
             ->setFirstResult($pagination->firstResult())
             ->setMaxResults($pagination->maxResults());
 
@@ -119,10 +118,9 @@ final class DoctrineQuestionsListQuery implements QuestionsListQuery
 
         $builder
             //->where('q.tags LIKE :pattern')
-            ->where('q.title LIKE :pattern')
+            ->where('q.description LIKE :pattern')
             ->orWhere('u.email LIKE :pattern')
             ->orWhere('u.name LIKE :pattern')
-            ->orWhere('q.body LIKE :pattern')
 
             ->setParameter('pattern', "%{$attributes['pattern']}%")
         ;

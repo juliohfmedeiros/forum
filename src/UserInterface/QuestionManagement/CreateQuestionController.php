@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * CreateQuestionController
+ * CreateAnswerController
  *
  * @package App\UserInterface\QuestionManagement
  */
@@ -40,7 +40,7 @@ final class CreateQuestionController extends AbstractController implements Authe
     private CommandBus $commandBus;
 
     /**
-     * Creates a CreateQuestionController
+     * Creates a CreateAnswerController
      *
      * @param CommandBus $commandBus
      */
@@ -95,7 +95,7 @@ final class CreateQuestionController extends AbstractController implements Authe
  *     request="AddQuestion",
  *         description="Object containing the very minimal inforamtion needded to create a question",
  *         required=true,
- *         @OA\JsonContent(ref="#/components/schemas/AddQuestionCommand")
+ *         @OA\JsonContent(ref="#/components/schemas/GiveQuestionCommand")
  *     ),
  *     security={
  *         {"OAuth2.0-Token": {"user.management"}}

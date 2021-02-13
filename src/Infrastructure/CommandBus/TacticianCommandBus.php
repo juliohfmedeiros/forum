@@ -26,7 +26,7 @@ final class TacticianCommandBus implements CommandBus
     private LeagueCommandBus $commandBus;
 
     /**
-     * Creates a TacticianCommandBus
+     * Creates a TacdedeticianCommandBus
      *
      * @param LeagueCommandBus $commandMiddleware
      */

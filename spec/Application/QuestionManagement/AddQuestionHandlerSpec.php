@@ -41,8 +41,8 @@ class AddQuestionHandlerSpec extends ObjectBehavior
         $user->userId()->willReturn(new User\UserId());
         $command = new AddQuestionCommand(
             $user->getWrappedObject(),
-            "Question title",
-            "Question body"
+            "Tag title",
+            "Tag body"
         );
 
         $question = $this->handle($command);

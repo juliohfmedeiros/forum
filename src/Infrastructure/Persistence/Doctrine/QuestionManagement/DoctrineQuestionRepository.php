@@ -18,11 +18,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\ORMException;
 
 /**
- * DoctrineQuestionsRepository
+ * DoctrineAnswerRepository
  *
  * @package App\Infrastructure\Persistence\Doctrine\QuestionManagement
  */
-final class DoctrineQuestionsRepository implements QuestionsRepository
+final class DoctrineQuestionRepository implements QuestionsRepository
 {
     /**
      * @var EntityManagerInterface|EntityManager
@@ -30,7 +30,7 @@ final class DoctrineQuestionsRepository implements QuestionsRepository
     private EntityManagerInterface $entityManager;
 
     /**
-     * Creates a DoctrineQuestionsRepository
+     * Creates a DoctrineAnswerRepository
      *
      * @param EntityManagerInterface $entityManager
      */
@@ -69,7 +69,7 @@ final class DoctrineQuestionsRepository implements QuestionsRepository
         }
 
         throw new EntityNotFound(
-            "Question with ID '{$questionId}' was not found in this server."
+            "Tag with ID '{$questionId}' was not found in this server."
         );
     }
 

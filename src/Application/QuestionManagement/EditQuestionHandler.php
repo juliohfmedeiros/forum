@@ -62,7 +62,7 @@ class EditQuestionHandler implements CommandHandler
 
         if (!OpenQuestion::create()->isSatisfiedBy($question)) {
             throw new FailedEntitySpecification(
-                "Question is already closed. You can only edit open questions."
+                "Tag is already closed. You can only edit open questions."
             );
         }
 

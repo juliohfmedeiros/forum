@@ -9,6 +9,8 @@
 
 namespace App\Domain\QuestionManagement;
 
+use App\Domain\AnswerManagement\Answer;
+use App\Domain\AnswerManagement\Answer\AnswerId;
 use App\Domain\Exception\EntityNotFound;
 use App\Domain\QuestionManagement\Question\QuestionId;
 
@@ -51,4 +53,5 @@ interface QuestionsRepository
      * @param Question $question
      */
     public function remove(Question $question): void;
+
 }

@@ -79,7 +79,7 @@ class User implements  UserEntityInterface, JsonSerializable, Comparable
 
     /**
      * @var Collection
-     * @ORM\OneToMany(targetEntity="App\Domain\QuestionManagement\Question", mappedBy="owner")
+     * @ORM\OneToMany(targetEntity="App\Domain\QuestionManagement\Tag", mappedBy="owner")
      */
     private Collection $questions;
 

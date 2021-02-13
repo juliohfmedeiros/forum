@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * ReadQuestionController
+ * ReadAnswerController
  *
  * @package App\UserInterface\QuestionManagement
  */
@@ -37,7 +37,7 @@ final class ReadQuestionController extends AbstractController implements Authent
     private QuestionsRepository $questionsRepository;
 
     /**
-     * Creates a ReadQuestionController
+     * Creates a ReadAnswerController
      *
      * @param QuestionsRepository $questionsRepository
      */
@@ -94,7 +94,7 @@ final class ReadQuestionController extends AbstractController implements Authent
  *     @OA\Response(
  *         response=200,
  *         description="The question with stored with provided identifier",
- *         @OA\JsonContent(ref="#/components/schemas/Question")
+ *         @OA\JsonContent(ref="#/components/schemas/Tag")
  *     ),
  *     security={
  *         {"OAuth2.0-Token": {"user.management"}}
